@@ -8,5 +8,5 @@ data class KafkaConfig(
     val bootstrapServer: String,
     val concurrency: Int,
     val sourceTopic: String,
-    val targetTopic: String
+    val targetTopic: String?
 )

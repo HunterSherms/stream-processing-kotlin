@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 class StreamingDataCleanerTest {
 
     private val config = KafkaConfig(
-        consumerGroupName = "StreaminDataCleanerTest",
+        consumerGroupName = "StreamingDataCleanerTest",
         bootstrapServer = "fake:bootstrap",
         concurrency = 1,
         sourceTopic = "users",

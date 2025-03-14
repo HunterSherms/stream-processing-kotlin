@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cloud.solarwinds</groupId>
@@ -16,7 +16,8 @@
 
     <properties>
         <java.version>21</java.version>
-        <kotlin.version>2.0.21</kotlin.version>
+        <kotlin.version>2.1.10</kotlin.version>
+        <kotlinx.serialization.version>1.8.0</kotlinx.serialization.version>
         <kafka.clients.version>3.9.0</kafka.clients.version>
     </properties>
 
@@ -24,6 +25,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -41,13 +46,9 @@
             <version>${kafka.clients.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-serialization-json-jvm</artifactId>
-            <version>1.7.3</version>
+            <version>${kotlinx.serialization.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.oshai</groupId>
@@ -59,6 +60,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.16</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>3.2.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,13 +73,19 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams-test-utils</artifactId>
+            <version>${kafka.clients.version}</version>
         </dependency>
     </dependencies>
 
