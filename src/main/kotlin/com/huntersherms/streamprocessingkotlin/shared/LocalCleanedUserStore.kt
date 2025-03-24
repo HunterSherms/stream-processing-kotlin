@@ -6,5 +6,5 @@ interface LocalCleanedUserStore {
 
     fun getByIds(ids: Collection<String>): List<CleanedUser>
 
-    fun put(id: String, cleanedUser: CleanedUser)
+    fun put(id: String, cleanedUserBytes: ByteArray)
 }

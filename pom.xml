@@ -15,8 +15,9 @@
     <description>stream-processing-kotlin</description>
 
     <properties>
+        <kotlin.compiler.languageVersion>2.1</kotlin.compiler.languageVersion>
         <java.version>21</java.version>
-        <kotlin.version>2.1.10</kotlin.version>
+        <kotlin.version>2.1.20</kotlin.version>
         <kotlinx.serialization.version>1.8.0</kotlinx.serialization.version>
         <kafka.clients.version>3.9.0</kafka.clients.version>
     </properties>
@@ -60,12 +61,22 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.16</version>
         </dependency>
+
+        <!-- Example 2 -->
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
             <version>3.2.0</version>
         </dependency>
 
+        <!-- Example 3 -->
+        <dependency>
+            <groupId>org.rocksdb</groupId>
+            <artifactId>rocksdbjni</artifactId>
+            <version>9.10.0</version>
+        </dependency>
+
+        <!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

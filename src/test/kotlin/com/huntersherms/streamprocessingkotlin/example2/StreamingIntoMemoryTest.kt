@@ -1,18 +1,18 @@
 package com.huntersherms.streamprocessingkotlin.example2
 
+import com.huntersherms.streamprocessingkotlin.config.KafkaConfig
 import com.huntersherms.streamprocessingkotlin.example1.StreamingIntoLocalStorage
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUser
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUserSerde
-import com.huntersherms.streamprocessingkotlin.shared.KafkaConfig
 import com.huntersherms.streamprocessingkotlin.shared.LocalCleanedUserStore
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.TopologyTestDriver
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -25,7 +25,8 @@ import java.time.temporal.ChronoUnit
 @SpringBootTest
 @ExtendWith(SpringExtension::class)
 @AutoConfigureMockMvc
-class StreamingIntoLocalStorageTest {
+@ActiveProfiles("example2")
+class StreamingIntoMemoryTest {
 
     private val config = KafkaConfig(
         consumerGroupName = "StreamingIntoLocalStorageTest",
@@ -36,7 +37,6 @@ class StreamingIntoLocalStorageTest {
     )
 
     @Autowired
-    @Qualifier("inMemoryLocalStore")
     lateinit var store: LocalCleanedUserStore
 
     @Autowired

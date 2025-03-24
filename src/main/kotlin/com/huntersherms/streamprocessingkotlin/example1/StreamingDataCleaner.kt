@@ -2,7 +2,7 @@ package com.huntersherms.streamprocessingkotlin.example1
 
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUser
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUserSerde
-import com.huntersherms.streamprocessingkotlin.shared.KafkaConfig
+import com.huntersherms.streamprocessingkotlin.config.KafkaConfig
 import com.huntersherms.streamprocessingkotlin.shared.UserSerde
 import com.huntersherms.streamprocessingkotlin.shared.toCleanedUser
 import io.github.oshai.kotlinlogging.KotlinLogging

@@ -1,4 +1,4 @@
-package com.huntersherms.streamprocessingkotlin.shared
+package com.huntersherms.streamprocessingkotlin.config
 
 /**
  * Generic configuration class for our various streams

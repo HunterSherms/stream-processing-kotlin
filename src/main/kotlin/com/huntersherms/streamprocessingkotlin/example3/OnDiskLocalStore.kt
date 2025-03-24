@@ -1,32 +1,30 @@
-package com.huntersherms.streamprocessingkotlin.example2
+package com.huntersherms.streamprocessingkotlin.example3
 
-import com.github.benmanes.caffeine.cache.Caffeine
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUser
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUserSerde
 import com.huntersherms.streamprocessingkotlin.shared.LocalCleanedUserStore
+import org.rocksdb.RocksDB
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 
-/**
- * Represents your in-memory storage.
- */
 @Service
-@Profile("example2")
-class InMemoryLocalStore: LocalCleanedUserStore {
+@Profile("example3")
+class OnDiskLocalStore(
+    private val rocksDB: RocksDB
+): LocalCleanedUserStore {
 
-    private val localCache = Caffeine.newBuilder()
-        .build<String, CleanedUser>()
     private val deserializer = CleanedUserSerde().deserializer()
 
     override fun getById(id: String): CleanedUser? {
-        return localCache.getIfPresent(id)
+        return rocksDB.get(id.toByteArray())?.let { deserializer.deserialize(null, it) }
     }
 
     override fun getByIds(ids: Collection<String>): List<CleanedUser> {
-        return localCache.getAllPresent(ids).values.toList()
+        return rocksDB.multiGetAsList(ids.map { it.toByteArray() })
+            .map { deserializer.deserialize(null, it) }
     }
 
     override fun put(id: String, cleanedUserBytes: ByteArray) {
-        localCache.put(id, deserializer.deserialize(null, cleanedUserBytes))
+        rocksDB.put(id.toByteArray(), cleanedUserBytes)
     }
 }

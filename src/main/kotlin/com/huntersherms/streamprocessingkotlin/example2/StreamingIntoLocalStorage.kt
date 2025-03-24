@@ -1,21 +1,16 @@
 package com.huntersherms.streamprocessingkotlin.example1
 
+import com.huntersherms.streamprocessingkotlin.config.KafkaConfig
 import com.huntersherms.streamprocessingkotlin.shared.CleanedUser
-import com.huntersherms.streamprocessingkotlin.shared.CleanedUserSerde
-import com.huntersherms.streamprocessingkotlin.shared.KafkaConfig
 import com.huntersherms.streamprocessingkotlin.shared.LocalCleanedUserStore
-import com.huntersherms.streamprocessingkotlin.shared.User
-import com.huntersherms.streamprocessingkotlin.shared.toCleanedUser
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.KafkaStreams
-import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.StreamsConfig
 import org.apache.kafka.streams.Topology
 import org.apache.kafka.streams.kstream.Consumed
-import org.apache.kafka.streams.kstream.Produced
 import org.springframework.context.SmartLifecycle
 import java.util.Properties
 import java.util.concurrent.atomic.AtomicBoolean
@@ -82,7 +77,7 @@ class StreamingIntoLocalStorage(
             config.sourceTopic,
             Consumed.with(
                 Serdes.StringSerde(),
-                CleanedUserSerde()
+                Serdes.ByteArray()
             )
         )
         .foreach { key, value ->
